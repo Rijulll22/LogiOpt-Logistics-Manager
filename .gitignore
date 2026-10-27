@@ -1,0 +1,8 @@
+target/
+reports/
+/snapshots/
+.idea/
+.vscode/
+*.log
+*.bak
+*.pptx

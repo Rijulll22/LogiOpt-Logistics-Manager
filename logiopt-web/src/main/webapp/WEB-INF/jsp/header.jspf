@@ -1,0 +1,21 @@
+<%-- Statically included after <body>; the including page declares the "c" taglib. --%>
+<c:if test="${not empty currentUser}">
+<div>
+    Signed in as <strong><c:out value="${currentUser.name}"/></strong> (<c:out value="${currentUser.email}"/>)
+    | <a href="<c:url value='/dashboard'/>">Dashboard</a>
+    | <a href="<c:url value='/shipments'/>">My shipments</a>
+    | <a href="<c:url value='/shipments/new'/>">New shipment</a>
+    | <a href="<c:url value='/bookings'/>">My bookings</a>
+    | <a href="<c:url value='/history'/>">History</a>
+    <c:if test="${not currentUser.admin}">| <a href="<c:url value='/notifications'/>">Notifications (<c:out value="${empty unreadCount ? 0 : unreadCount}"/> unread)</a></c:if>
+    <c:if test="${currentUser.admin}">| <a href="<c:url value='/admin/dashboard'/>">Admin: dashboard</a>
+        | <a href="<c:url value='/admin/users'/>">Admin: users</a>
+        | <a href="<c:url value='/admin/bookings'/>">Admin: bookings</a>
+        | <a href="<c:url value='/admin/tracking'/>">Admin: tracking</a></c:if>
+    <form method="post" action="<c:url value='/logout'/>">
+        <input type="hidden" name="csrfToken" value="<c:out value='${csrfToken}'/>">
+        <button type="submit">Sign out</button>
+    </form>
+</div>
+<hr>
+</c:if>
